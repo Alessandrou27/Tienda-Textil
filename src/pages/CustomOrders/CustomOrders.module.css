@@ -1,0 +1,428 @@
+.customOrders {
+  min-height: 100vh;
+  background: var(--light-gray);
+  padding: var(--space-8) 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.servicesSection {
+  margin-bottom: var(--space-16);
+}
+
+.sectionTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-8);
+}
+
+.serviceCard {
+  background: var(--white);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-green);
+}
+
+.serviceIcon {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  color: var(--white);
+}
+
+.serviceName {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: var(--space-3);
+}
+
+.serviceDescription {
+  color: var(--text-black);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.servicePrice {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.formSection {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.formContainer {
+  padding: var(--space-12);
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.formTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.formDescription {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  line-height: 1.6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.formSection {
+  padding: var(--space-8);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--radius-lg);
+  background: var(--light-gray);
+}
+
+.formSection h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: var(--space-6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-weight: 600;
+  color: var(--primary-black);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input,
+.select,
+.textarea {
+  padding: var(--space-4);
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast);
+  background: var(--white);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-green);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  border: 2px dashed var(--medium-gray);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  transition: all var(--transition-fast);
+}
+
+.imageUpload:hover {
+  border-color: var(--primary-green);
+  background: var(--light-gray);
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadButton {
+  background: var(--primary-green);
+  color: var(--white);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.uploadButton:hover {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.uploadHint {
+  color: var(--dark-gray);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.imagePreview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.imageItem {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeImage {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: var(--primary-black);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+.submitSection {
+  text-align: center;
+  padding: var(--space-8);
+  background: var(--primary-black);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+}
+
+.submitButton {
+  background: var(--accent-green);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0 auto var(--space-4);
+  transition: all var(--transition-normal);
+  min-width: 200px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--light-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.submitNote {
+  color: var(--light-gray);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.successPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+  padding: var(--space-8);
+}
+
+.successContent {
+  background: var(--white);
+  padding: var(--space-16);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  max-width: 600px;
+}
+
+.successIcon {
+  color: var(--primary-green);
+  margin-bottom: var(--space-6);
+}
+
+.successTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-6);
+}
+
+.successMessage {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+}
+
+.successActions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.primaryButton {
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.primaryButton:hover {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+  .customOrders {
+    padding: var(--space-6) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-4);
+  }
+  
+  .title {
+    font-size: var(--text-3xl);
+  }
+  
+  .formContainer {
+    padding: var(--space-6);
+  }
+  
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .imagePreview {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
