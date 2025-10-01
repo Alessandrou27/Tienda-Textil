@@ -50,8 +50,24 @@
 }
 
 .utilityBar.scrolled .utilityItem span {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
+}
+
+/* En scroll: mover íconos de la derecha hacia la izquierda y ocultar el bloque izquierdo */
+/* En scroll: mantener los iconos de la izquierda visibles y alineados */
+.utilityBar.scrolled .utilityLeft {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.utilityBar.scrolled .utilityItem {
+  align-items: center;
+  gap: 0;
+}
+
+.utilityBar.scrolled .utilityItem svg {
+  display: block;
 }
 
 .utilityItem:hover {
