@@ -34,6 +34,27 @@ const featuredProducts = [
 const Home = () => {
   return (
     <div className={styles.home}>
+      {/* Video Hero Section */}
+      <section className={styles.videoHero}>
+        <video 
+          className={styles.heroVideo}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source 
+            src="https://media.brunellocucinelli.com/video/upload/q_auto/f_auto,vc_auto/vc_vp9/v1/inspiration-2025/09_SETTEMBRE/CATALOGO_FW25_PT2_REFRESH/ESECUTIVI/HOMEPAGE/30-09-25_riga_4_style01_HP_Brunello_Cucinelli.webm?_s=vp-1.8.0" 
+            type="video/webm" 
+          />
+          Tu navegador no soporta el elemento de video.
+        </video>
+        <div className={styles.videoOverlay}>
+          <h1 className={styles.videoTitle}>TEXTIL</h1>
+          <p className={styles.videoSubtitle}>Elegancia y Calidad en Cada Detalle</p>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
