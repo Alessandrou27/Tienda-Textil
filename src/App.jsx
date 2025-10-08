@@ -1,7 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { router } from './router';
-import './assets/variables.css';
 import './App.css';
 
 function App() {

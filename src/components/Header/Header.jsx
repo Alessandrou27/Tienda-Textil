@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag, Search, Heart, User, Globe, Phone, Mail, MapPin, Headphones } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import heroImage from '../../assets/hero.jpg';
 import styles from './Header.module.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { items, getTotalItems } = useCart();
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [pinnedDropdown, setPinnedDropdown] = useState(null);
+  const { cart, removeFromCart, updateQuantity, getTotalPrice, getTotalItems } = useCart();
   const location = useLocation();
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +31,39 @@ const Header = () => {
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handleDropdownEnter = (dropdown) => {
+    // Cancelar cualquier timeout pendiente
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    
+    // Siempre activar el dropdown cuando se pasa el cursor, a menos que haya uno pinned diferente
+    if (!pinnedDropdown || pinnedDropdown === dropdown) {
+      setActiveDropdown(dropdown);
+    }
+  };
+
+  const handleDropdownLeave = () => {
+    if (!pinnedDropdown) {
+      // Crear un timeout de 3 segundos antes de cerrar el dropdown
+      timeoutRef.current = setTimeout(() => {
+        setActiveDropdown(null);
+        timeoutRef.current = null;
+      }, 1000);
+    }
+  };
+
+  const handleDropdownClick = (dropdown) => {
+    if (pinnedDropdown === dropdown) {
+      setPinnedDropdown(null);
+      setActiveDropdown(null);
+    } else {
+      setPinnedDropdown(dropdown);
+      setActiveDropdown(dropdown);
+    }
   };
 
   const isActive = (path) => {
@@ -132,37 +169,503 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className={styles.nav}>
-            <Link 
-              to="/" 
-              className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
+          <nav 
+            className={styles.nav}
+            onMouseLeave={handleDropdownLeave}
+          >
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'novedades' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('novedades')}
+              onClick={() => handleDropdownClick('novedades')}
             >
-              Inicio
-            </Link>
-            <Link 
-              to="/shop" 
-              className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}
+              <Link 
+                to="/" 
+                className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
+              >
+                NOVEDADES
+              </Link>
+              {(activeDropdown === 'novedades' || pinnedDropdown === 'novedades') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('novedades')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>NOVEDADES</h3>
+                      <Link to="/shop?category=guia-estilo">GUÍA DE ESTILO</Link>
+                      <Link to="/shop?category=tennis-sets">TENNIS SETS</Link>
+                      <Link to="/shop?category=nevermind-stories">NEVERMIND STORIES</Link>
+                      <Link to="/shop?category=cachemire">CACHEMIRE</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>SERVICIOS EXCLUSIVOS</h3>
+                      <Link to="/custom-orders">CASA CUCINELLI</Link>
+                      <Link to="/shop?category=vicuna">VICUÑA</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>ABRIGOS Y CHAQUETAS</h3>
+                      <Link to="/shop?category=novedades-mujer">NOVEDADES</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'mujer' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('mujer')}
+              onClick={() => handleDropdownClick('mujer')}
             >
-              Tienda
-            </Link>
-            <Link 
-              to="/custom-orders" 
-              className={`${styles.navLink} ${isActive('/custom-orders') ? styles.active : ''}`}
+              <Link 
+                to="/shop?category=mujer" 
+                className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}
+              >
+                MUJER
+              </Link>
+              {(activeDropdown === 'mujer' || pinnedDropdown === 'mujer') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('mujer')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>ROPA</h3>
+                      <Link to="/shop?category=abrigos">Abrigos y Chaquetas</Link>
+                      <Link to="/shop?category=prendas-punto">Prendas de Punto</Link>
+                      <Link to="/shop?category=vestidos">Vestidos y Monos</Link>
+                      <Link to="/shop?category=blusas">Blusas y Camisas</Link>
+                      <Link to="/shop?category=camisetas">Camisetas y Tops</Link>
+                      <Link to="/shop?category=faldas">Faldas</Link>
+                      <Link to="/shop?category=pantalones">Pantalones</Link>
+                      <Link to="/shop?category=vaqueros">Vaqueros</Link>
+                      <Link to="/shop?category=beachwear">Beachwear</Link>
+                      <Link to="/shop?category=todo-ropa">Toda la Ropa</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>ZAPATOS</h3>
+                      <Link to="/shop?category=sandalias">Sandalias de Tacón</Link>
+                      <Link to="/shop?category=zapatos-planos">Zapatos Planos</Link>
+                      <Link to="/shop?category=mocasines">Mocasines</Link>
+                      <Link to="/shop?category=botas">Botas</Link>
+                      <Link to="/shop?category=sandalias-planas">Sandalias</Link>
+                      <Link to="/shop?category=todo-zapatos">Todos los Zapatos</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>ACCESORIOS</h3>
+                      <Link to="/shop?category=gafas">Gafas</Link>
+                      <Link to="/shop?category=pequena-marroquineria">Pequeña Marroquinería</Link>
+                      <Link to="/shop?category=creacion-joyas">Creación de Joyas</Link>
+                      <Link to="/shop?category=bufandas">Bufandas</Link>
+                      <Link to="/shop?category=sombreros">Sombreros</Link>
+                      <Link to="/shop?category=cinturones">Cinturones</Link>
+                      <Link to="/shop?category=otras-accesorios">Otras Accesorios</Link>
+                      <Link to="/shop?category=todo-accesorios">Todos los Accesorios</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>NOVEDADES</h3>
+                      <Link to="/shop?category=guia-estilo">GUÍA DE ESTILO</Link>
+                      <Link to="/shop?category=tennis-sets">TENNIS SETS</Link>
+                      <Link to="/shop?category=nevermind-stories">NEVERMIND STORIES</Link>
+                      <Link to="/shop?category=cachemire">CACHEMIRE</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>SERVICIOS EXCLUSIVOS</h3>
+                      <Link to="/custom-orders">CASA CUCINELLI</Link>
+                      <Link to="/shop?category=vicuna">VICUÑA</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>BOLSOS</h3>
+                      <Link to="/shop?category=bolsos-pequenos">Bolsos pequeños y Carteras de Mano</Link>
+                      <Link to="/shop?category=bandoleras">Bandoleras</Link>
+                      <Link to="/shop?category=bolsos-mano">Bolsos de Mano y Shopper</Link>
+                      <Link to="/shop?category=todo-bolsos">Todos los Bolsos</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'hombre' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('hombre')}
+              onClick={() => handleDropdownClick('hombre')}
             >
-              Encargos
-            </Link>
-            <Link 
-              to="/about" 
-              className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
+              <Link 
+                to="/shop?category=hombre" 
+                className={`${styles.navLink} ${isActive('/custom-orders') ? styles.active : ''}`}
+              >
+                HOMBRE
+              </Link>
+              {(activeDropdown === 'hombre' || pinnedDropdown === 'hombre') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('hombre')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>ROPA</h3>
+                      <Link to="/shop?category=abrigos-hombre">Abrigos y Chaquetas</Link>
+                      <Link to="/shop?category=prendas-punto-hombre">Prendas de Punto</Link>
+                      <Link to="/shop?category=trajes-hombre">Trajes y Blazers</Link>
+                      <Link to="/shop?category=camisas-hombre">Camisas</Link>
+                      <Link to="/shop?category=camisetas-hombre">Camisetas y Polos</Link>
+                      <Link to="/shop?category=pantalones-hombre">Pantalones</Link>
+                      <Link to="/shop?category=vaqueros-hombre">Vaqueros</Link>
+                      <Link to="/shop?category=beachwear-hombre">Beachwear</Link>
+                      <Link to="/shop?category=todo-ropa-hombre">Toda la Ropa</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>ZAPATOS</h3>
+                      <Link to="/shop?category=zapatos-vestir">Zapatos de Vestir</Link>
+                      <Link to="/shop?category=mocasines-hombre">Mocasines</Link>
+                      <Link to="/shop?category=sneakers">Sneakers</Link>
+                      <Link to="/shop?category=botas-hombre">Botas</Link>
+                      <Link to="/shop?category=sandalias-hombre">Sandalias</Link>
+                      <Link to="/shop?category=todo-zapatos-hombre">Todos los Zapatos</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>ACCESORIOS</h3>
+                      <Link to="/shop?category=gafas-hombre">Gafas</Link>
+                      <Link to="/shop?category=pequena-marroquineria-hombre">Pequeña Marroquinería</Link>
+                      <Link to="/shop?category=relojes">Relojes</Link>
+                      <Link to="/shop?category=bufandas-hombre">Bufandas</Link>
+                      <Link to="/shop?category=sombreros-hombre">Sombreros</Link>
+                      <Link to="/shop?category=cinturones-hombre">Cinturones</Link>
+                      <Link to="/shop?category=otras-accesorios-hombre">Otras Accesorios</Link>
+                      <Link to="/shop?category=todo-accesorios-hombre">Todos los Accesorios</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>NOVEDADES</h3>
+                      <Link to="/shop?category=guia-estilo-hombre">GUÍA DE ESTILO</Link>
+                      <Link to="/shop?category=tennis-sets-hombre">TENNIS & GOLF SETS</Link>
+                      <Link to="/shop?category=nevermind-stories-hombre">NEVERMIND STORIES</Link>
+                      <Link to="/shop?category=cachemire-hombre">CACHEMIRE</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>SERVICIOS EXCLUSIVOS</h3>
+                      <Link to="/custom-orders">SARTORIA SOLOMEO</Link>
+                      <Link to="/custom-orders">CASA CUCINELLI</Link>
+                      <Link to="/shop?category=vicuna-hombre">VICUÑA</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>BOLSOS</h3>
+                      <Link to="/shop?category=bolsos-duo">BC Duo</Link>
+                      <Link to="/shop?category=bolsos-pequenos-hombre">Bolsos pequeños y Carteras de Mano</Link>
+                      <Link to="/shop?category=bandoleras-hombre">Bandoleras</Link>
+                      <Link to="/shop?category=bolsos-mano-hombre">Bolsos de Mano y Shopper</Link>
+                      <Link to="/shop?category=todo-bolsos-hombre">Todos los Bolsos</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'gafas' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('gafas')}
+              onClick={() => handleDropdownClick('gafas')}
             >
-              Nosotros
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
+              <Link 
+                to="/shop?category=gafas" 
+                className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
+              >
+                GAFAS
+              </Link>
+              {(activeDropdown === 'gafas' || pinnedDropdown === 'gafas') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('gafas')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>GAFAS DE MUJER</h3>
+                      <Link to="/shop?category=gafas-sol-mujer">Gafas de Sol</Link>
+                      <Link to="/shop?category=gafas-vista-mujer">Gafas de Vista</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>GAFAS DE HOMBRE</h3>
+                      <Link to="/shop?category=gafas-sol-hombre">Gafas de Sol</Link>
+                      <Link to="/shop?category=gafas-vista-hombre">Gafas de Vista</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>MS. BRUNELLO</h3>
+                      <Link to="/shop?category=ms-brunello">Descubre la Colección</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'ninos' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('ninos')}
+              onClick={() => handleDropdownClick('ninos')}
             >
-              Contacto
-            </Link>
+              <Link 
+                to="/shop?category=ninos" 
+                className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
+              >
+                NIÑOS
+              </Link>
+              {(activeDropdown === 'ninos' || pinnedDropdown === 'ninos') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('ninos')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>NIÑO (4-12 AÑOS)</h3>
+                      <Link to="/shop?category=shop-by-look-nino">Shop by Look</Link>
+                      <Link to="/shop?category=prendas-punto-nino">Prendas de Punto</Link>
+                      <Link to="/shop?category=abrigos-chaquetas-nino">Abrigos y Chaquetas</Link>
+                      <Link to="/shop?category=trajes-blazers-nino">Trajes y Blazers</Link>
+                      <Link to="/shop?category=camisetas-polos-nino">Camisetas y Polos</Link>
+                      <Link to="/shop?category=pantalones-nino">Pantalones</Link>
+                      <Link to="/shop?category=traiswear-nino">Traiswear</Link>
+                      <Link to="/shop?category=calzado-nino">Calzado</Link>
+                      <Link to="/shop?category=accesorios-nino">Accesorios</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>NIÑA (4-12 AÑOS)</h3>
+                      <Link to="/shop?category=shop-by-look-nina">Shop by Look</Link>
+                      <Link to="/shop?category=prendas-punto-nina">Prendas de Punto</Link>
+                      <Link to="/shop?category=abrigos-chaquetas-nina">Abrigos y Chaquetas</Link>
+                      <Link to="/shop?category=vestidos-monos-nina">Vestidos y Monos</Link>
+                      <Link to="/shop?category=camisetas-coordinated-nina">Camisetas Coordinadas</Link>
+                      <Link to="/shop?category=camisetas-faldas-nina">Camisetas y Faldas</Link>
+                      <Link to="/shop?category=pantalones-nina">Pantalones</Link>
+                      <Link to="/shop?category=traiswear-nina">Traiswear</Link>
+                      <Link to="/shop?category=calzado-nina">Calzado</Link>
+                      <Link to="/shop?category=accesorios-nina">Accesorios</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>BEBÉ (0-36 MESES)</h3>
+                      <Link to="/shop?category=ropa-bebe">Ropa</Link>
+                      <Link to="/shop?category=bodys-pijamas-bebe">Bodys y Pijamas</Link>
+                      <Link to="/shop?category=regalos-nacimiento">Regalos de Nacimiento</Link>
+                      <Link to="/shop?category=pequenos-sueños">Pequeños Sueños</Link>
+                      <Link to="/shop?category=accesorios-bebe">Accesorios</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>NOVEDADES</h3>
+                      <Link to="/shop?category=tennis-sets-ninos">TENNIS SETS</Link>
+                      <Link to="/shop?category=regalos-nina">REGALOS NIÑA</Link>
+                      <Link to="/shop?category=regalos-nino">REGALOS NIÑO</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'regalos' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('regalos')}
+              onClick={() => handleDropdownClick('regalos')}
+            >
+              <Link 
+                to="/shop?category=regalos" 
+                className={styles.navLink}
+              >
+                REGALOS
+              </Link>
+              {(activeDropdown === 'regalos' || pinnedDropdown === 'regalos') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('regalos')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>REGALOS MUJER</h3>
+                      <Link to="/shop?category=regalos-mujer">Descubre la Selección</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>REGALOS HOMBRE</h3>
+                      <Link to="/shop?category=regalos-hombre">Descubre la Selección</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>REGALOS NIÑA</h3>
+                      <Link to="/shop?category=regalos-nina">Descubre la Selección</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>REGALOS NIÑO</h3>
+                      <Link to="/shop?category=regalos-nino">Descubre la Selección</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>REGALOS LIFESTYLE</h3>
+                      <Link to="/shop?category=regalos-lifestyle">Descubre la Selección</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre la Selección</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre la Selección</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre la Selección</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre la Selección</p>
+                      </div>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre la Selección</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'lifestyle' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('lifestyle')}
+              onClick={() => handleDropdownClick('lifestyle')}
+            >
+              <Link 
+                to="/shop?category=lifestyle" 
+                className={styles.navLink}
+              >
+                LIFESTYLE
+              </Link>
+              {(activeDropdown === 'lifestyle' || pinnedDropdown === 'lifestyle') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('lifestyle')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>CASA</h3>
+                      <Link to="/shop?category=textiles-hogar">Textiles para el Hogar</Link>
+                      <Link to="/shop?category=decoracion">Decoración</Link>
+                      <Link to="/shop?category=velas-fragancias">Velas y Fragancias</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>VIAJE</h3>
+                      <Link to="/shop?category=maletas-equipaje">Maletas y Equipaje</Link>
+                      <Link to="/shop?category=accesorios-viaje">Accesorios de Viaje</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>BIENESTAR</h3>
+                      <Link to="/shop?category=productos-bienestar">Productos de Bienestar</Link>
+                      <Link to="/shop?category=cuidado-personal">Cuidado Personal</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'historias' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('historias')}
+              onClick={() => handleDropdownClick('historias')}
+            >
+              <Link 
+                to="/about" 
+                className={styles.navLink}
+              >
+                HISTORIAS
+              </Link>
+              {(activeDropdown === 'historias' || pinnedDropdown === 'historias') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('historias')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>NUESTRA HISTORIA</h3>
+                      <Link to="/about/historia">La Historia de Brunello Cucinelli</Link>
+                      <Link to="/about/filosofia">Nuestra Filosofía</Link>
+                      <Link to="/about/artesania">Artesanía Italiana</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>SOSTENIBILIDAD</h3>
+                      <Link to="/about/sostenibilidad">Compromiso Sostenible</Link>
+                      <Link to="/about/responsabilidad">Responsabilidad Social</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>NOTICIAS</h3>
+                      <Link to="/news">Últimas Noticias</Link>
+                      <Link to="/events">Eventos</Link>
+                    </div>
+                    <div className={styles.dropdownImages}>
+                      <div className={styles.dropdownImage}>
+                        <img src={heroImage} alt="Descubre más" />
+                        <p>Descubre más</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -227,11 +730,11 @@ const Header = () => {
               </button>
             </div>
             <div className={styles.cartContent}>
-              {items.length === 0 ? (
+              {cart.length === 0 ? (
                 <p className={styles.emptyCart}>Tu carrito está vacío</p>
               ) : (
                 <div className={styles.cartItems}>
-                  {items.map((item) => (
+                  {cart.map((item) => (
                     <div key={item.id} className={styles.cartItem}>
                       <div className={styles.itemInfo}>
                         <h4>{item.name}</h4>
