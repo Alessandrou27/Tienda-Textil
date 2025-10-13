@@ -11,7 +11,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [pinnedDropdown, setPinnedDropdown] = useState(null);
-  const { cart, removeFromCart, updateQuantity, getTotalPrice, getTotalItems } = useCart();
+  const { items: cart, removeFromCart, updateQuantity, getTotalPrice, getTotalItems } = useCart();
   const location = useLocation();
   const timeoutRef = useRef(null);
 
@@ -48,11 +48,11 @@ const Header = () => {
 
   const handleDropdownLeave = () => {
     if (!pinnedDropdown) {
-      // Crear un timeout de 3 segundos antes de cerrar el dropdown
+      // Crear un timeout de 300ms antes de cerrar el dropdown
       timeoutRef.current = setTimeout(() => {
         setActiveDropdown(null);
         timeoutRef.current = null;
-      }, 1000);
+      }, 100);
     }
   };
 
@@ -70,10 +70,12 @@ const Header = () => {
     return location.pathname === path;
   };
 
+  const isHomePage = location.pathname === '/';
+
   return (
     <header className={styles.header}>
       {/* Top Utility Bar - Always visible */}
-      <div className={`${styles.utilityBar} ${isScrolled ? styles.scrolled : ''}`}>
+      <div className={`${styles.utilityBar} ${isScrolled || !isHomePage ? styles.scrolled : ''}`}>
         <div className={styles.utilityContainer}>
           <div className={styles.utilityLeft}>
             <div className={styles.utilityItem}>
@@ -99,7 +101,7 @@ const Header = () => {
           </div>
           
           {/* Navigation in utility bar when main header is hidden */}
-          {isScrolled && (
+          {(isScrolled || !isHomePage) && (
             <div className={styles.utilityNav}>
               <Link 
                 to="/" 
@@ -157,8 +159,9 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Header - Hidden on scroll */}
-      <div className={`${styles.mainHeader} ${isScrolled ? styles.mainHeaderHidden : ''}`}>
+      {/* Main Header - Only visible on home page and hidden on scroll */}
+      {isHomePage && (
+        <div className={`${styles.mainHeader} ${isScrolled ? styles.mainHeaderHidden : ''}`}>
         <div className={styles.container}>
           {/* Logo */}
           <Link to="/" className={styles.logo}>
@@ -677,6 +680,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      )}
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
