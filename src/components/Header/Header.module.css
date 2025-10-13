@@ -84,7 +84,7 @@
 }
 
 .utilityBar.scrolled {
-  background: rgba(77, 76, 76, 0.9);
+  background: rgba(37, 37, 37, 0.95);
   backdrop-filter: blur(10px);
 }
 

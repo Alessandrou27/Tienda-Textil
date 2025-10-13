@@ -396,48 +396,6 @@ const Header = () => {
               )}
             </div>
 
-            <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'gafas' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('gafas')}
-              onClick={() => handleDropdownClick('gafas')}
-            >
-              <Link 
-                to="/shop?category=gafas" 
-                className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
-              >
-                GAFAS
-              </Link>
-              {(activeDropdown === 'gafas' || pinnedDropdown === 'gafas') && (
-                <div 
-                  className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('gafas')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropdownSection}>
-                      <h3>GAFAS DE MUJER</h3>
-                      <Link to="/shop?category=gafas-sol-mujer">Gafas de Sol</Link>
-                      <Link to="/shop?category=gafas-vista-mujer">Gafas de Vista</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>GAFAS DE HOMBRE</h3>
-                      <Link to="/shop?category=gafas-sol-hombre">Gafas de Sol</Link>
-                      <Link to="/shop?category=gafas-vista-hombre">Gafas de Vista</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>MS. BRUNELLO</h3>
-                      <Link to="/shop?category=ms-brunello">Descubre la Colección</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
 
             <div 
               className={`${styles.navItem} ${pinnedDropdown === 'ninos' ? styles.pinned : ''}`}
@@ -580,95 +538,7 @@ const Header = () => {
               )}
             </div>
 
-            <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'lifestyle' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('lifestyle')}
-              onClick={() => handleDropdownClick('lifestyle')}
-            >
-              <Link 
-                to="/shop?category=lifestyle" 
-                className={styles.navLink}
-              >
-                LIFESTYLE
-              </Link>
-              {(activeDropdown === 'lifestyle' || pinnedDropdown === 'lifestyle') && (
-                <div 
-                  className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('lifestyle')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropdownSection}>
-                      <h3>CASA</h3>
-                      <Link to="/shop?category=textiles-hogar">Textiles para el Hogar</Link>
-                      <Link to="/shop?category=decoracion">Decoración</Link>
-                      <Link to="/shop?category=velas-fragancias">Velas y Fragancias</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>VIAJE</h3>
-                      <Link to="/shop?category=maletas-equipaje">Maletas y Equipaje</Link>
-                      <Link to="/shop?category=accesorios-viaje">Accesorios de Viaje</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>BIENESTAR</h3>
-                      <Link to="/shop?category=productos-bienestar">Productos de Bienestar</Link>
-                      <Link to="/shop?category=cuidado-personal">Cuidado Personal</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
 
-            <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'historias' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('historias')}
-              onClick={() => handleDropdownClick('historias')}
-            >
-              <Link 
-                to="/about" 
-                className={styles.navLink}
-              >
-                HISTORIAS
-              </Link>
-              {(activeDropdown === 'historias' || pinnedDropdown === 'historias') && (
-                <div 
-                  className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('historias')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropdownSection}>
-                      <h3>NUESTRA HISTORIA</h3>
-                      <Link to="/about/historia">La Historia de Brunello Cucinelli</Link>
-                      <Link to="/about/filosofia">Nuestra Filosofía</Link>
-                      <Link to="/about/artesania">Artesanía Italiana</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>SOSTENIBILIDAD</h3>
-                      <Link to="/about/sostenibilidad">Compromiso Sostenible</Link>
-                      <Link to="/about/responsabilidad">Responsabilidad Social</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>NOTICIAS</h3>
-                      <Link to="/news">Últimas Noticias</Link>
-                      <Link to="/events">Eventos</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
           </nav>
 
           {/* Mobile Menu Button */}
