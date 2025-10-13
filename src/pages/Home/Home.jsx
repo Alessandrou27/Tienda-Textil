@@ -129,17 +129,6 @@ const Home = () => {
           alt="TEXTIL - Elegancia y Calidad en Cada Detalle"
           className={styles.heroVideo}
         />
-        <div className={styles.videoOverlay}>
-          <h1 className={styles.videoTitle}>Colección OI25</h1>
-          <div className={styles.heroButtons}>
-            <Link to="/shop?category=mujer" className={styles.heroButton}>
-              NOVEDADES MUJER
-            </Link>
-            <Link to="/shop?category=hombre" className={styles.heroButton}>
-              NOVEDADES HOMBRE
-            </Link>
-          </div>
-        </div>
       </section>
 
       {/* Hero Section */}

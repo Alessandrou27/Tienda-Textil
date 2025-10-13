@@ -80,23 +80,23 @@ const Header = () => {
           <div className={styles.utilityLeft}>
             <div className={styles.utilityItem}>
               <Globe size={12} />
-              <span>ESPAÑA</span>
-            </div>
-            <div className={styles.utilityItem}>
-              <Headphones size={12} />
-              <span>CONTÁCTANOS</span>
-            </div>
-            <div className={styles.utilityItem}>
-              <MapPin size={12} />
-              <span>BOUTIQUE</span>
-            </div>
-            <div className={styles.utilityItem}>
-              <Phone size={12} />
-              <span>+34 919 03 00 95</span>
+              <span>Perú</span>
             </div>
             <div className={styles.utilityItem}>
               <Mail size={12} />
-              <span>NEWSLETTER</span>
+              <span>ciamar25@hotmail.com</span>
+            </div>
+            <div className={styles.utilityItem}>
+              <Mail size={12} />
+              <span>juanky@hotmail.com</span>
+            </div>
+            <div className={styles.utilityItem}>
+              <Phone size={12} />
+              <span>912 301 451</span>
+            </div>
+            <div className={styles.utilityItem}>
+              <Phone size={12} />
+              <span>981 412 799</span>
             </div>
           </div>
           
@@ -113,19 +113,19 @@ const Header = () => {
                 to="/shop" 
                 className={`${styles.utilityNavLink} ${isActive('/shop') ? styles.active : ''}`}
               >
-                TIENDA
+                PRODUCTOS
               </Link>
               <Link 
                 to="/custom-orders" 
                 className={`${styles.utilityNavLink} ${isActive('/custom-orders') ? styles.active : ''}`}
               >
-                ENCARGOS
+                ESTAMPADOS
               </Link>
               <Link 
                 to="/about" 
                 className={`${styles.utilityNavLink} ${isActive('/about') ? styles.active : ''}`}
               >
-                NOSOTROS
+                EMPRESA
               </Link>
               <Link 
                 to="/contact" 
@@ -166,9 +166,8 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className={styles.logo}>
             <div className={styles.logoEmblem}>
-              <div className={styles.emblemIcon}>T</div>
+              <img src="/logo.png" alt="Logo" className={styles.logoImage} />
             </div>
-            <span className={styles.logoText}>TEXTIL</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -185,7 +184,7 @@ const Header = () => {
                 to="/" 
                 className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
               >
-                NOVEDADES
+                SERVICIOS
               </Link>
               {(activeDropdown === 'novedades' || pinnedDropdown === 'novedades') && (
                 <div 
@@ -234,7 +233,7 @@ const Header = () => {
                 to="/shop?category=mujer" 
                 className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}
               >
-                MUJER
+                CAMISETAS
               </Link>
               {(activeDropdown === 'mujer' || pinnedDropdown === 'mujer') && (
                 <div 
@@ -319,7 +318,7 @@ const Header = () => {
                 to="/shop?category=hombre" 
                 className={`${styles.navLink} ${isActive('/custom-orders') ? styles.active : ''}`}
               >
-                HOMBRE
+                SUDADERAS
               </Link>
               {(activeDropdown === 'hombre' || pinnedDropdown === 'hombre') && (
                 <div 
@@ -406,7 +405,7 @@ const Header = () => {
                 to="/shop?category=ninos" 
                 className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
               >
-                NIÑOS
+                GORRAS
               </Link>
               {(activeDropdown === 'ninos' || pinnedDropdown === 'ninos') && (
                 <div 
@@ -482,7 +481,7 @@ const Header = () => {
                 to="/shop?category=regalos" 
                 className={styles.navLink}
               >
-                REGALOS
+                ACCESORIOS
               </Link>
               {(activeDropdown === 'regalos' || pinnedDropdown === 'regalos') && (
                 <div 
