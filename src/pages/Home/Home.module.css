@@ -192,7 +192,7 @@
 }
 
 .highlight {
-  color: #8B4513;
+  color: var(--primary-green);
   font-weight: 500;
   position: relative;
 }
@@ -204,7 +204,7 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #8B4513, #D2691E);
+  background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
   border-radius: 2px;
 }
 
@@ -228,7 +228,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  background: linear-gradient(135deg, #8B4513, #A0522D);
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
   color: white;
   padding: var(--space-4) var(--space-8);
   text-decoration: none;
@@ -238,7 +238,7 @@
   text-transform: uppercase;
   border-radius: 50px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+  box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -260,26 +260,26 @@
 
 .primaryButton:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+  box-shadow: 0 8px 25px rgba(45, 90, 39, 0.4);
 }
 
 .secondaryButton {
   display: inline-flex;
   align-items: center;
   background: transparent;
-  color: #8B4513;
+  color: var(--primary-green);
   padding: var(--space-4) var(--space-6);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
-  border: 2px solid #8B4513;
+  border: 2px solid var(--primary-green);
   border-radius: 50px;
   transition: all 0.3s ease;
 }
 
 .secondaryButton:hover {
-  background: #8B4513;
+  background: var(--primary-green);
   color: white;
   transform: translateY(-2px);
 }
@@ -323,9 +323,9 @@
   bottom: 0;
   background: linear-gradient(
     45deg,
-    rgba(139, 69, 19, 0.1) 0%,
+    rgba(45, 90, 39, 0.1) 0%,
     transparent 50%,
-    rgba(139, 69, 19, 0.05) 100%
+    rgba(45, 90, 39, 0.05) 100%
   );
   pointer-events: none;
 }
@@ -513,8 +513,8 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(210, 105, 30, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(45, 90, 39, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -589,12 +589,12 @@
 
 .genderTab:hover {
   color: var(--primary-green);
-  background: rgba(139, 69, 19, 0.05);
+  background: rgba(45, 90, 39, 0.05);
 }
 
 .genderTab.active {
   color: var(--primary-green);
-  background: rgba(139, 69, 19, 0.1);
+  background: rgba(45, 90, 39, 0.1);
 }
 
 .genderTab.active::after {
@@ -840,8 +840,8 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(45, 90, 39, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -880,7 +880,7 @@
   padding: var(--space-10);
   border-radius: var(--radius-2xl);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(45, 90, 39, 0.1);
 }
 
 .formRow {
@@ -921,7 +921,7 @@
 .formTextarea:focus {
   outline: none;
   border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+  box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.1);
 }
 
 .formTextarea {
@@ -945,14 +945,14 @@
   font-weight: 600;
   padding: var(--space-4) var(--space-8);
   font-size: var(--text-lg);
-  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.3);
   transition: all var(--transition-normal);
   cursor: pointer;
 }
 
 .contactForm .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+  box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
 }
 
 .contactForm .secondaryButton {
@@ -991,8 +991,8 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(210, 105, 30, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(45, 90, 39, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -1012,7 +1012,7 @@
   font-weight: 700;
   color: var(--primary-black);
   margin-bottom: var(--space-4);
-  background: linear-gradient(135deg, #8B4513, #D2691E);
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1050,7 +1050,7 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(45, 90, 39, 0.1);
   opacity: 0;
   transform: translateY(50px);
   flex: 1;
@@ -1066,7 +1066,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #8B4513, #D2691E);
+  background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
   transform: scaleX(0);
   transition: transform 0.4s ease;
 }
@@ -1086,7 +1086,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto var(--space-6);
-  background: linear-gradient(135deg, #8B4513, #D2691E);
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1104,7 +1104,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #D2691E, #8B4513);
+  background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -1139,7 +1139,7 @@
 }
 
 .benefitCard:hover .benefitContent h3 {
-  color: #8B4513;
+  color: var(--primary-green);
 }
 
 /* Staggered Animation Classes */

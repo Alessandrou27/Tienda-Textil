@@ -157,10 +157,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #8B4513, #A0522D);
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
   border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #A0522D, #CD853F);
+  background: linear-gradient(135deg, var(--secondary-green), var(--accent-green));
 }
