@@ -1,0 +1,503 @@
+/* Contact Page Styles - Matching CustomOrders Design */
+.contact {
+  /* Color Palette */
+  --primary-green: #2d5a27;
+  --secondary-green: #4a7c59;
+  --light-green: #6b8e6b;
+  --accent-green: #8fbc8f;
+  --dark-green: #1a3d1a;
+  
+  --primary-black: #000000;
+  --secondary-black: #1a1a1a;
+  --light-black: #2d2d2d;
+  --text-black: #333333;
+  
+  --white: #ffffff;
+  --light-gray: #f8f8f8;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #666666;
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: 'Playfair Display', Georgia, serif;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  min-height: 100vh;
+  background: var(--light-gray);
+  padding: var(--space-8) var(--space-4);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.heroSubtitle {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  line-height: 1.6;
+}
+
+/* Contact Info Section */
+.contactInfoSection {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.sectionTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-8);
+}
+
+.contactCard {
+  background: var(--light-gray);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.contactCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-green);
+  box-shadow: var(--shadow-md);
+}
+
+.contactIcon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  color: var(--white);
+}
+
+.contactTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.contactText {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--text-black);
+}
+
+/* Form Section */
+.formSection {
+  margin-bottom: var(--space-16);
+}
+
+.formContainer {
+  background: var(--white);
+  padding: var(--space-12);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.formTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.formDescription {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  line-height: 1.6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-weight: 600;
+  color: var(--primary-black);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input,
+.select,
+.textarea {
+  padding: var(--space-4);
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast);
+  background: var(--white);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-green);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitSection {
+  text-align: center;
+  padding-top: var(--space-4);
+}
+
+.submitButton {
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0 auto var(--space-4);
+  transition: all var(--transition-normal);
+  min-width: 200px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.submitNote {
+  color: var(--dark-gray);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+/* Support Section */
+.supportSection {
+  margin-bottom: var(--space-16);
+}
+
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+}
+
+.supportCard {
+  background: var(--white);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.supportCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-green);
+  box-shadow: var(--shadow-xl);
+}
+
+.supportIcon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  color: var(--white);
+}
+
+.supportTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: var(--space-4);
+}
+
+.supportDescription {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--text-black);
+  margin-bottom: var(--space-6);
+}
+
+.supportButton {
+  background: transparent;
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.supportButton:hover {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* Map Section */
+.mapSection {
+  margin-bottom: var(--space-16);
+}
+
+.mapContainer {
+  margin-top: var(--space-12);
+}
+
+.mapPlaceholder {
+  height: 400px;
+  background: var(--light-gray);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-gray);
+  border: 2px dashed var(--medium-gray);
+}
+
+.mapPlaceholder svg {
+  margin-bottom: var(--space-4);
+}
+
+.mapAddress {
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-top: var(--space-2);
+}
+
+/* Success Page */
+.successPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+  padding: var(--space-8);
+}
+
+.successContent {
+  background: var(--white);
+  padding: var(--space-16);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  max-width: 600px;
+}
+
+.successIcon {
+  color: var(--primary-green);
+  margin-bottom: var(--space-6);
+}
+
+.successTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: var(--space-6);
+}
+
+.successMessage {
+  font-size: var(--text-lg);
+  color: var(--text-black);
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+}
+
+.primaryButton {
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.primaryButton:hover {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact {
+    padding: var(--space-6) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-4);
+  }
+  
+  .heroTitle {
+    font-size: var(--text-3xl);
+  }
+  
+  .heroSubtitle {
+    font-size: var(--text-base);
+  }
+  
+  .formContainer {
+    padding: var(--space-8);
+  }
+  
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .supportGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mapPlaceholder {
+    height: 300px;
+  }
+  
+  .successContent {
+    padding: var(--space-8);
+  }
+  
+  .successTitle {
+    font-size: var(--text-3xl);
+  }
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Scissors, Palette, Clock, Award, CheckCircle, Send, Upload } from 'lucide-react';
+import { Printer, Palette, Clock, Award, CheckCircle, Send, Upload, Image, Shirt } from 'lucide-react';
 import styles from './CustomOrders.module.css';
 
 const CustomOrders = () => {
@@ -11,10 +11,10 @@ const CustomOrders = () => {
     description: '',
     budget: '',
     timeline: '',
-    measurements: '',
-    fabricPreference: '',
-    colorPreference: '',
-    specialRequirements: ''
+    quantity: '',
+    garmentType: '',
+    designColors: '',
+    technicalSpecs: ''
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -23,32 +23,32 @@ const CustomOrders = () => {
 
   const services = [
     {
-      id: 'dressmaking',
-      name: 'Confección de Vestidos',
-      description: 'Vestidos a medida para ocasiones especiales',
-      icon: <Scissors size={24} />,
-      price: 'Desde $150'
+      id: 'screen-printing',
+      name: 'Serigrafía',
+      description: 'Estampados de alta calidad en prendas y textiles',
+      icon: <Printer size={24} />,
+      price: 'Desde $15'
     },
     {
-      id: 'alterations',
-      name: 'Ajustes y Modificaciones',
-      description: 'Ajustes de prendas existentes',
-      icon: <Award size={24} />,
+      id: 'digital-printing',
+      name: 'Impresión Digital',
+      description: 'Diseños complejos y fotografías en alta resolución',
+      icon: <Image size={24} />,
       price: 'Desde $25'
     },
     {
       id: 'embroidery',
       name: 'Bordados Personalizados',
-      description: 'Bordados únicos en tus prendas',
+      description: 'Bordados únicos en prendas y accesorios',
       icon: <Palette size={24} />,
       price: 'Desde $50'
     },
     {
-      id: 'consultation',
-      name: 'Consultoría de Estilo',
-      description: 'Asesoramiento personalizado en moda',
-      icon: <Clock size={24} />,
-      price: 'Desde $75'
+      id: 'vinyl-printing',
+      name: 'Vinilo Textil',
+      description: 'Aplicación de vinilos cortados para diseños precisos',
+      icon: <Shirt size={24} />,
+      price: 'Desde $20'
     }
   ];
 
@@ -87,9 +87,9 @@ const CustomOrders = () => {
           <CheckCircle size={64} className={styles.successIcon} />
           <h1 className={styles.successTitle}>¡Solicitud Enviada!</h1>
           <p className={styles.successMessage}>
-            Hemos recibido tu solicitud de encargo personalizado. 
-            Nos pondremos en contacto contigo en las próximas 24 horas 
-            para discutir los detalles de tu proyecto.
+            Hemos recibido tu solicitud de estampado personalizado. 
+            Te enviaremos una cotización detallada en las próximas 24 horas 
+            con los precios y tiempos de entrega para tu proyecto.
           </p>
           <div className={styles.successActions}>
             <button 
@@ -104,15 +104,15 @@ const CustomOrders = () => {
                   description: '',
                   budget: '',
                   timeline: '',
-                  measurements: '',
-                  fabricPreference: '',
-                  colorPreference: '',
-                  specialRequirements: ''
+                  quantity: '',
+                  garmentType: '',
+                  designColors: '',
+                  technicalSpecs: ''
                 });
                 setSelectedImages([]);
               }}
             >
-              Hacer Otro Encargo
+              Solicitar Otro Estampado
             </button>
           </div>
         </div>
@@ -125,15 +125,15 @@ const CustomOrders = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <h1 className={styles.title}>Encargos Personalizados</h1>
+          <h1 className={styles.title}>Estampados Personalizados</h1>
           <p className={styles.subtitle}>
-            Transforma tus ideas en prendas únicas con nuestros servicios de confección personalizada
+            Transforma tus ideas en diseños únicos con nuestros servicios de estampado y personalización
           </p>
         </div>
 
         {/* Services Grid */}
         <section className={styles.servicesSection}>
-          <h2 className={styles.sectionTitle}>Nuestros Servicios</h2>
+          <h2 className={styles.sectionTitle}>Nuestros Servicios de Estampado</h2>
           <div className={styles.servicesGrid}>
             {services.map(service => (
               <div key={service.id} className={styles.serviceCard}>
@@ -152,9 +152,9 @@ const CustomOrders = () => {
         <section className={styles.formSection}>
           <div className={styles.formContainer}>
             <div className={styles.formHeader}>
-              <h2 className={styles.formTitle}>Solicitar Encargo</h2>
+              <h2 className={styles.formTitle}>Solicitar Estampado</h2>
               <p className={styles.formDescription}>
-                Completa el formulario y nos pondremos en contacto contigo para discutir tu proyecto.
+                Completa el formulario y nos pondremos en contacto contigo para discutir tu proyecto de estampado.
               </p>
             </div>
 
@@ -203,10 +203,10 @@ const CustomOrders = () => {
 
               {/* Service Details */}
               <div className={styles.formSection}>
-                <h3 className={styles.sectionTitle}>Detalles del Servicio</h3>
+                <h3 className={styles.sectionTitle}>Detalles del Estampado</h3>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="serviceType" className={styles.label}>Tipo de Servicio *</label>
+                    <label htmlFor="serviceType" className={styles.label}>Tipo de Estampado *</label>
                     <select
                       id="serviceType"
                       name="serviceType"
@@ -215,7 +215,7 @@ const CustomOrders = () => {
                       required
                       className={styles.select}
                     >
-                      <option value="">Selecciona un servicio</option>
+                      <option value="">Selecciona un tipo de estampado</option>
                       {services.map(service => (
                         <option key={service.id} value={service.id}>
                           {service.name}
@@ -233,10 +233,10 @@ const CustomOrders = () => {
                       className={styles.select}
                     >
                       <option value="">Selecciona un rango</option>
-                      <option value="0-100">$0 - $100</option>
-                      <option value="100-250">$100 - $250</option>
-                      <option value="250-500">$250 - $500</option>
-                      <option value="500+">$500+</option>
+                      <option value="0-200">$0 - $200</option>
+                      <option value="200-500">$200 - $500</option>
+                      <option value="500-1000">$500 - $1,000</option>
+                      <option value="1000+">$1,000+</option>
                     </select>
                   </div>
                   <div className={styles.formGroup}>
@@ -249,9 +249,9 @@ const CustomOrders = () => {
                       className={styles.select}
                     >
                       <option value="">Selecciona un tiempo</option>
+                      <option value="3-5-days">3-5 días</option>
                       <option value="1-week">1 semana</option>
                       <option value="2-weeks">2 semanas</option>
-                      <option value="1-month">1 mes</option>
                       <option value="flexible">Flexible</option>
                     </select>
                   </div>
@@ -260,9 +260,9 @@ const CustomOrders = () => {
 
               {/* Project Description */}
               <div className={styles.formSection}>
-                <h3 className={styles.sectionTitle}>Descripción del Proyecto</h3>
+                <h3 className={styles.sectionTitle}>Descripción del Diseño</h3>
                 <div className={styles.formGroup}>
-                  <label htmlFor="description" className={styles.label}>Describe tu proyecto *</label>
+                  <label htmlFor="description" className={styles.label}>Describe tu diseño *</label>
                   <textarea
                     id="description"
                     name="description"
@@ -271,49 +271,49 @@ const CustomOrders = () => {
                     required
                     rows={4}
                     className={styles.textarea}
-                    placeholder="Describe detalladamente lo que tienes en mente..."
+                    placeholder="Describe detalladamente tu diseño, colores, estilo y cualquier detalle específico..."
                   />
                 </div>
               </div>
 
               {/* Measurements and Preferences */}
               <div className={styles.formSection}>
-                <h3 className={styles.sectionTitle}>Medidas y Preferencias</h3>
+                <h3 className={styles.sectionTitle}>Especificaciones del Producto</h3>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="measurements" className={styles.label}>Medidas (opcional)</label>
-                    <textarea
-                      id="measurements"
-                      name="measurements"
-                      value={formData.measurements}
+                    <label htmlFor="measurements" className={styles.label}>Cantidad de Piezas</label>
+                    <input
+                      type="text"
+                      id="quantity"
+                      name="quantity"
+                      value={formData.quantity}
                       onChange={handleInputChange}
-                      rows={3}
-                      className={styles.textarea}
-                      placeholder="Pecho, cintura, cadera, etc."
+                      className={styles.input}
+                      placeholder="Ej: 50 camisetas, 20 sudaderas, etc."
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="fabricPreference" className={styles.label}>Preferencia de Tela</label>
+                    <label htmlFor="fabricPreference" className={styles.label}>Tipo de Prenda</label>
                     <input
                       type="text"
-                      id="fabricPreference"
-                      name="fabricPreference"
-                      value={formData.fabricPreference}
+                      id="garmentType"
+                      name="garmentType"
+                      value={formData.garmentType}
                       onChange={handleInputChange}
                       className={styles.input}
-                      placeholder="Algodón, lino, seda, etc."
+                      placeholder="Camisetas, sudaderas, gorras, bolsas, etc."
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="colorPreference" className={styles.label}>Preferencia de Color</label>
+                    <label htmlFor="colorPreference" className={styles.label}>Colores del Diseño</label>
                     <input
                       type="text"
-                      id="colorPreference"
-                      name="colorPreference"
-                      value={formData.colorPreference}
+                      id="designColors"
+                      name="designColors"
+                      value={formData.designColors}
                       onChange={handleInputChange}
                       className={styles.input}
-                      placeholder="Colores deseados"
+                      placeholder="Colores específicos del diseño a estampar"
                     />
                   </div>
                 </div>
@@ -321,7 +321,7 @@ const CustomOrders = () => {
 
               {/* Image Upload */}
               <div className={styles.formSection}>
-                <h3 className={styles.sectionTitle}>Imágenes de Referencia</h3>
+                <h3 className={styles.sectionTitle}>Archivos de Diseño</h3>
                 <div className={styles.imageUpload}>
                   <input
                     type="file"
@@ -334,10 +334,10 @@ const CustomOrders = () => {
                   />
                   <label htmlFor="images" className={styles.uploadButton}>
                     <Upload size={20} />
-                    Subir Imágenes
+                    Subir Diseños
                   </label>
                   <p className={styles.uploadHint}>
-                    Sube fotos de inspiración, diseños similares o referencias
+                    Sube archivos de diseño, logos, imágenes o referencias visuales
                   </p>
                 </div>
                 
@@ -365,19 +365,19 @@ const CustomOrders = () => {
 
               {/* Special Requirements */}
               <div className={styles.formSection}>
-                <h3 className={styles.sectionTitle}>Requisitos Especiales</h3>
+                <h3 className={styles.sectionTitle}>Especificaciones Técnicas</h3>
                 <div className={styles.formGroup}>
                   <label htmlFor="specialRequirements" className={styles.label}>
-                    Requisitos adicionales
+                    Especificaciones técnicas adicionales
                   </label>
                   <textarea
-                    id="specialRequirements"
-                    name="specialRequirements"
-                    value={formData.specialRequirements}
+                    id="technicalSpecs"
+                    name="technicalSpecs"
+                    value={formData.technicalSpecs}
                     onChange={handleInputChange}
                     rows={3}
                     className={styles.textarea}
-                    placeholder="Alergias, restricciones, preferencias especiales..."
+                    placeholder="Tamaño del diseño, posición del estampado, acabados especiales, etc."
                   />
                 </div>
               </div>
@@ -397,12 +397,12 @@ const CustomOrders = () => {
                   ) : (
                     <>
                       <Send size={20} />
-                      Enviar Solicitud
+                      Solicitar Cotización
                     </>
                   )}
                 </button>
                 <p className={styles.submitNote}>
-                  * Campos obligatorios. Te contactaremos en 24 horas.
+                  * Campos obligatorios. Te enviaremos una cotización en 24 horas.
                 </p>
               </div>
             </form>

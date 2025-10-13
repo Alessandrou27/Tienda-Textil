@@ -25,6 +25,12 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdowns when navigating to a new page
+  useEffect(() => {
+    setActiveDropdown(null);
+    setPinnedDropdown(null);
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -64,6 +70,11 @@ const Header = () => {
       setPinnedDropdown(dropdown);
       setActiveDropdown(dropdown);
     }
+  };
+
+  const handleLinkClick = () => {
+    setActiveDropdown(null);
+    setPinnedDropdown(null);
   };
 
   const isActive = (path) => {
@@ -176,9 +187,9 @@ const Header = () => {
             onMouseLeave={handleDropdownLeave}
           >
             <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'novedades' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('novedades')}
-              onClick={() => handleDropdownClick('novedades')}
+              className={`${styles.navItem} ${pinnedDropdown === 'servicios' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('servicios')}
+              onClick={() => handleDropdownClick('servicios')}
             >
               <Link 
                 to="/" 
@@ -186,38 +197,24 @@ const Header = () => {
               >
                 SERVICIOS
               </Link>
-              {(activeDropdown === 'novedades' || pinnedDropdown === 'novedades') && (
+              {(activeDropdown === 'servicios' || pinnedDropdown === 'servicios') && (
                 <div 
                   className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('novedades')}
+                  onMouseEnter={() => handleDropdownEnter('servicios')}
                   onMouseLeave={handleDropdownLeave}
                 >
                   <div className={styles.dropdownContent}>
                     <div className={styles.dropdownSection}>
-                      <h3>NOVEDADES</h3>
-                      <Link to="/shop?category=guia-estilo">GUÍA DE ESTILO</Link>
-                      <Link to="/shop?category=tennis-sets">TENNIS SETS</Link>
-                      <Link to="/shop?category=nevermind-stories">NEVERMIND STORIES</Link>
-                      <Link to="/shop?category=cachemire">CACHEMIRE</Link>
+                      <h3>SERVICIOS DE ESTAMPADO</h3>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Serigrafía</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Impresión Digital</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Bordados</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Vinilo Textil</Link>
                     </div>
                     <div className={styles.dropdownSection}>
-                      <h3>SERVICIOS EXCLUSIVOS</h3>
-                      <Link to="/custom-orders">CASA CUCINELLI</Link>
-                      <Link to="/shop?category=vicuna">VICUÑA</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>ABRIGOS Y CHAQUETAS</h3>
-                      <Link to="/shop?category=novedades-mujer">NOVEDADES</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
+                      <h3>CONSULTORÍA</h3>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Diseño Personalizado</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Asesoramiento Técnico</Link>
                     </div>
                   </div>
                 </div>
@@ -225,84 +222,37 @@ const Header = () => {
             </div>
 
             <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'mujer' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('mujer')}
-              onClick={() => handleDropdownClick('mujer')}
+              className={`${styles.navItem} ${pinnedDropdown === 'productos' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('productos')}
+              onClick={() => handleDropdownClick('productos')}
             >
               <Link 
-                to="/shop?category=mujer" 
+                to="/shop" 
                 className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}
               >
-                CAMISETAS
+                PRODUCTOS
               </Link>
-              {(activeDropdown === 'mujer' || pinnedDropdown === 'mujer') && (
+              {(activeDropdown === 'productos' || pinnedDropdown === 'productos') && (
                 <div 
                   className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('mujer')}
+                  onMouseEnter={() => handleDropdownEnter('productos')}
                   onMouseLeave={handleDropdownLeave}
                 >
                   <div className={styles.dropdownContent}>
                     <div className={styles.dropdownSection}>
-                      <h3>ROPA</h3>
-                      <Link to="/shop?category=abrigos">Abrigos y Chaquetas</Link>
-                      <Link to="/shop?category=prendas-punto">Prendas de Punto</Link>
-                      <Link to="/shop?category=vestidos">Vestidos y Monos</Link>
-                      <Link to="/shop?category=blusas">Blusas y Camisas</Link>
-                      <Link to="/shop?category=camisetas">Camisetas y Tops</Link>
-                      <Link to="/shop?category=faldas">Faldas</Link>
-                      <Link to="/shop?category=pantalones">Pantalones</Link>
-                      <Link to="/shop?category=vaqueros">Vaqueros</Link>
-                      <Link to="/shop?category=beachwear">Beachwear</Link>
-                      <Link to="/shop?category=todo-ropa">Toda la Ropa</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>ZAPATOS</h3>
-                      <Link to="/shop?category=sandalias">Sandalias de Tacón</Link>
-                      <Link to="/shop?category=zapatos-planos">Zapatos Planos</Link>
-                      <Link to="/shop?category=mocasines">Mocasines</Link>
-                      <Link to="/shop?category=botas">Botas</Link>
-                      <Link to="/shop?category=sandalias-planas">Sandalias</Link>
-                      <Link to="/shop?category=todo-zapatos">Todos los Zapatos</Link>
+                      <h3>PRENDAS</h3>
+                      <Link to="/shop?category=camisetas" onClick={handleLinkClick}>Camisetas</Link>
+                      <Link to="/shop?category=sudaderas" onClick={handleLinkClick}>Sudaderas</Link>
+                      <Link to="/shop?category=gorras" onClick={handleLinkClick}>Gorras</Link>
+                      <Link to="/shop?category=pantalones" onClick={handleLinkClick}>Pantalones</Link>
+                      <Link to="/shop?category=vestidos" onClick={handleLinkClick}>Vestidos</Link>
                     </div>
                     <div className={styles.dropdownSection}>
                       <h3>ACCESORIOS</h3>
-                      <Link to="/shop?category=gafas">Gafas</Link>
-                      <Link to="/shop?category=pequena-marroquineria">Pequeña Marroquinería</Link>
-                      <Link to="/shop?category=creacion-joyas">Creación de Joyas</Link>
-                      <Link to="/shop?category=bufandas">Bufandas</Link>
-                      <Link to="/shop?category=sombreros">Sombreros</Link>
-                      <Link to="/shop?category=cinturones">Cinturones</Link>
-                      <Link to="/shop?category=otras-accesorios">Otras Accesorios</Link>
-                      <Link to="/shop?category=todo-accesorios">Todos los Accesorios</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>NOVEDADES</h3>
-                      <Link to="/shop?category=guia-estilo">GUÍA DE ESTILO</Link>
-                      <Link to="/shop?category=tennis-sets">TENNIS SETS</Link>
-                      <Link to="/shop?category=nevermind-stories">NEVERMIND STORIES</Link>
-                      <Link to="/shop?category=cachemire">CACHEMIRE</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>SERVICIOS EXCLUSIVOS</h3>
-                      <Link to="/custom-orders">CASA CUCINELLI</Link>
-                      <Link to="/shop?category=vicuna">VICUÑA</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>BOLSOS</h3>
-                      <Link to="/shop?category=bolsos-pequenos">Bolsos pequeños y Carteras de Mano</Link>
-                      <Link to="/shop?category=bandoleras">Bandoleras</Link>
-                      <Link to="/shop?category=bolsos-mano">Bolsos de Mano y Shopper</Link>
-                      <Link to="/shop?category=todo-bolsos">Todos los Bolsos</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
+                      <Link to="/shop?category=bolsas" onClick={handleLinkClick}>Bolsas</Link>
+                      <Link to="/shop?category=cinturones" onClick={handleLinkClick}>Cinturones</Link>
+                      <Link to="/shop?category=gafas" onClick={handleLinkClick}>Gafas</Link>
+                      <Link to="/shop?category=relojes" onClick={handleLinkClick}>Relojes</Link>
                     </div>
                   </div>
                 </div>
@@ -310,85 +260,36 @@ const Header = () => {
             </div>
 
             <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'hombre' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('hombre')}
-              onClick={() => handleDropdownClick('hombre')}
+              className={`${styles.navItem} ${pinnedDropdown === 'estampados' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('estampados')}
+              onClick={() => handleDropdownClick('estampados')}
             >
               <Link 
-                to="/shop?category=hombre" 
+                to="/custom-orders" 
                 className={`${styles.navLink} ${isActive('/custom-orders') ? styles.active : ''}`}
               >
-                SUDADERAS
+                ESTAMPADOS
               </Link>
-              {(activeDropdown === 'hombre' || pinnedDropdown === 'hombre') && (
+              {(activeDropdown === 'estampados' || pinnedDropdown === 'estampados') && (
                 <div 
                   className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('hombre')}
+                  onMouseEnter={() => handleDropdownEnter('estampados')}
                   onMouseLeave={handleDropdownLeave}
                 >
                   <div className={styles.dropdownContent}>
                     <div className={styles.dropdownSection}>
-                      <h3>ROPA</h3>
-                      <Link to="/shop?category=abrigos-hombre">Abrigos y Chaquetas</Link>
-                      <Link to="/shop?category=prendas-punto-hombre">Prendas de Punto</Link>
-                      <Link to="/shop?category=trajes-hombre">Trajes y Blazers</Link>
-                      <Link to="/shop?category=camisas-hombre">Camisas</Link>
-                      <Link to="/shop?category=camisetas-hombre">Camisetas y Polos</Link>
-                      <Link to="/shop?category=pantalones-hombre">Pantalones</Link>
-                      <Link to="/shop?category=vaqueros-hombre">Vaqueros</Link>
-                      <Link to="/shop?category=beachwear-hombre">Beachwear</Link>
-                      <Link to="/shop?category=todo-ropa-hombre">Toda la Ropa</Link>
+                      <h3>TIPOS DE ESTAMPADO</h3>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Serigrafía</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Impresión Digital</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Bordados</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Vinilo Textil</Link>
                     </div>
                     <div className={styles.dropdownSection}>
-                      <h3>ZAPATOS</h3>
-                      <Link to="/shop?category=zapatos-vestir">Zapatos de Vestir</Link>
-                      <Link to="/shop?category=mocasines-hombre">Mocasines</Link>
-                      <Link to="/shop?category=sneakers">Sneakers</Link>
-                      <Link to="/shop?category=botas-hombre">Botas</Link>
-                      <Link to="/shop?category=sandalias-hombre">Sandalias</Link>
-                      <Link to="/shop?category=todo-zapatos-hombre">Todos los Zapatos</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>ACCESORIOS</h3>
-                      <Link to="/shop?category=gafas-hombre">Gafas</Link>
-                      <Link to="/shop?category=pequena-marroquineria-hombre">Pequeña Marroquinería</Link>
-                      <Link to="/shop?category=relojes">Relojes</Link>
-                      <Link to="/shop?category=bufandas-hombre">Bufandas</Link>
-                      <Link to="/shop?category=sombreros-hombre">Sombreros</Link>
-                      <Link to="/shop?category=cinturones-hombre">Cinturones</Link>
-                      <Link to="/shop?category=otras-accesorios-hombre">Otras Accesorios</Link>
-                      <Link to="/shop?category=todo-accesorios-hombre">Todos los Accesorios</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>NOVEDADES</h3>
-                      <Link to="/shop?category=guia-estilo-hombre">GUÍA DE ESTILO</Link>
-                      <Link to="/shop?category=tennis-sets-hombre">TENNIS & GOLF SETS</Link>
-                      <Link to="/shop?category=nevermind-stories-hombre">NEVERMIND STORIES</Link>
-                      <Link to="/shop?category=cachemire-hombre">CACHEMIRE</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>SERVICIOS EXCLUSIVOS</h3>
-                      <Link to="/custom-orders">SARTORIA SOLOMEO</Link>
-                      <Link to="/custom-orders">CASA CUCINELLI</Link>
-                      <Link to="/shop?category=vicuna-hombre">VICUÑA</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>BOLSOS</h3>
-                      <Link to="/shop?category=bolsos-duo">BC Duo</Link>
-                      <Link to="/shop?category=bolsos-pequenos-hombre">Bolsos pequeños y Carteras de Mano</Link>
-                      <Link to="/shop?category=bandoleras-hombre">Bandoleras</Link>
-                      <Link to="/shop?category=bolsos-mano-hombre">Bolsos de Mano y Shopper</Link>
-                      <Link to="/shop?category=todo-bolsos-hombre">Todos los Bolsos</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
+                      <h3>PRODUCTOS</h3>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Camisetas</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Sudaderas</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Gorras</Link>
+                      <Link to="/custom-orders" onClick={handleLinkClick}>Bolsas</Link>
                     </div>
                   </div>
                 </div>
@@ -397,140 +298,69 @@ const Header = () => {
 
 
             <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'ninos' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('ninos')}
-              onClick={() => handleDropdownClick('ninos')}
+              className={`${styles.navItem} ${pinnedDropdown === 'empresa' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('empresa')}
+              onClick={() => handleDropdownClick('empresa')}
             >
               <Link 
-                to="/shop?category=ninos" 
+                to="/about" 
+                className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
+              >
+                EMPRESA
+              </Link>
+              {(activeDropdown === 'empresa' || pinnedDropdown === 'empresa') && (
+                <div 
+                  className={styles.dropdown}
+                  onMouseEnter={() => handleDropdownEnter('empresa')}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className={styles.dropdownContent}>
+                    <div className={styles.dropdownSection}>
+                      <h3>SOBRE NOSOTROS</h3>
+                      <Link to="/about" onClick={handleLinkClick}>Nuestra Historia</Link>
+                      <Link to="/about" onClick={handleLinkClick}>Misión y Visión</Link>
+                      <Link to="/about" onClick={handleLinkClick}>Equipo</Link>
+                    </div>
+                    <div className={styles.dropdownSection}>
+                      <h3>INFORMACIÓN</h3>
+                      <Link to="/about" onClick={handleLinkClick}>Políticas</Link>
+                      <Link to="/about" onClick={handleLinkClick}>Términos y Condiciones</Link>
+                      <Link to="/about" onClick={handleLinkClick}>Privacidad</Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div 
+              className={`${styles.navItem} ${pinnedDropdown === 'contacto' ? styles.pinned : ''}`}
+              onMouseEnter={() => handleDropdownEnter('contacto')}
+              onClick={() => handleDropdownClick('contacto')}
+            >
+              <Link 
+                to="/contact" 
                 className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
               >
-                GORRAS
+                CONTACTO
               </Link>
-              {(activeDropdown === 'ninos' || pinnedDropdown === 'ninos') && (
+              {(activeDropdown === 'contacto' || pinnedDropdown === 'contacto') && (
                 <div 
                   className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('ninos')}
+                  onMouseEnter={() => handleDropdownEnter('contacto')}
                   onMouseLeave={handleDropdownLeave}
                 >
                   <div className={styles.dropdownContent}>
                     <div className={styles.dropdownSection}>
-                      <h3>NIÑO (4-12 AÑOS)</h3>
-                      <Link to="/shop?category=shop-by-look-nino">Shop by Look</Link>
-                      <Link to="/shop?category=prendas-punto-nino">Prendas de Punto</Link>
-                      <Link to="/shop?category=abrigos-chaquetas-nino">Abrigos y Chaquetas</Link>
-                      <Link to="/shop?category=trajes-blazers-nino">Trajes y Blazers</Link>
-                      <Link to="/shop?category=camisetas-polos-nino">Camisetas y Polos</Link>
-                      <Link to="/shop?category=pantalones-nino">Pantalones</Link>
-                      <Link to="/shop?category=traiswear-nino">Traiswear</Link>
-                      <Link to="/shop?category=calzado-nino">Calzado</Link>
-                      <Link to="/shop?category=accesorios-nino">Accesorios</Link>
+                      <h3>CONTACTO</h3>
+                      <Link to="/contact" onClick={handleLinkClick}>Información de Contacto</Link>
+                      <Link to="/contact" onClick={handleLinkClick}>Ubicación</Link>
+                      <Link to="/contact" onClick={handleLinkClick}>Horarios</Link>
                     </div>
                     <div className={styles.dropdownSection}>
-                      <h3>NIÑA (4-12 AÑOS)</h3>
-                      <Link to="/shop?category=shop-by-look-nina">Shop by Look</Link>
-                      <Link to="/shop?category=prendas-punto-nina">Prendas de Punto</Link>
-                      <Link to="/shop?category=abrigos-chaquetas-nina">Abrigos y Chaquetas</Link>
-                      <Link to="/shop?category=vestidos-monos-nina">Vestidos y Monos</Link>
-                      <Link to="/shop?category=camisetas-coordinated-nina">Camisetas Coordinadas</Link>
-                      <Link to="/shop?category=camisetas-faldas-nina">Camisetas y Faldas</Link>
-                      <Link to="/shop?category=pantalones-nina">Pantalones</Link>
-                      <Link to="/shop?category=traiswear-nina">Traiswear</Link>
-                      <Link to="/shop?category=calzado-nina">Calzado</Link>
-                      <Link to="/shop?category=accesorios-nina">Accesorios</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>BEBÉ (0-36 MESES)</h3>
-                      <Link to="/shop?category=ropa-bebe">Ropa</Link>
-                      <Link to="/shop?category=bodys-pijamas-bebe">Bodys y Pijamas</Link>
-                      <Link to="/shop?category=regalos-nacimiento">Regalos de Nacimiento</Link>
-                      <Link to="/shop?category=pequenos-sueños">Pequeños Sueños</Link>
-                      <Link to="/shop?category=accesorios-bebe">Accesorios</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>NOVEDADES</h3>
-                      <Link to="/shop?category=tennis-sets-ninos">TENNIS SETS</Link>
-                      <Link to="/shop?category=regalos-nina">REGALOS NIÑA</Link>
-                      <Link to="/shop?category=regalos-nino">REGALOS NIÑO</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre más</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div 
-              className={`${styles.navItem} ${pinnedDropdown === 'regalos' ? styles.pinned : ''}`}
-              onMouseEnter={() => handleDropdownEnter('regalos')}
-              onClick={() => handleDropdownClick('regalos')}
-            >
-              <Link 
-                to="/shop?category=regalos" 
-                className={styles.navLink}
-              >
-                ACCESORIOS
-              </Link>
-              {(activeDropdown === 'regalos' || pinnedDropdown === 'regalos') && (
-                <div 
-                  className={styles.dropdown}
-                  onMouseEnter={() => handleDropdownEnter('regalos')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropdownSection}>
-                      <h3>REGALOS MUJER</h3>
-                      <Link to="/shop?category=regalos-mujer">Descubre la Selección</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>REGALOS HOMBRE</h3>
-                      <Link to="/shop?category=regalos-hombre">Descubre la Selección</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>REGALOS NIÑA</h3>
-                      <Link to="/shop?category=regalos-nina">Descubre la Selección</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>REGALOS NIÑO</h3>
-                      <Link to="/shop?category=regalos-nino">Descubre la Selección</Link>
-                    </div>
-                    <div className={styles.dropdownSection}>
-                      <h3>REGALOS LIFESTYLE</h3>
-                      <Link to="/shop?category=regalos-lifestyle">Descubre la Selección</Link>
-                    </div>
-                    <div className={styles.dropdownImages}>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre la Selección</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre la Selección</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre la Selección</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre la Selección</p>
-                      </div>
-                      <div className={styles.dropdownImage}>
-                        <img src={heroImage} alt="Descubre más" />
-                        <p>Descubre la Selección</p>
-                      </div>
+                      <h3>SOPORTE</h3>
+                      <Link to="/contact" onClick={handleLinkClick}>Preguntas Frecuentes</Link>
+                      <Link to="/contact" onClick={handleLinkClick}>Soporte Técnico</Link>
+                      <Link to="/contact" onClick={handleLinkClick}>Garantías</Link>
                     </div>
                   </div>
                 </div>
@@ -559,28 +389,28 @@ const Header = () => {
             className={`${styles.mobileNavLink} ${isActive('/') ? styles.active : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Inicio
+            Servicios
           </Link>
           <Link 
             to="/shop" 
             className={`${styles.mobileNavLink} ${isActive('/shop') ? styles.active : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Tienda
+            Productos
           </Link>
           <Link 
             to="/custom-orders" 
             className={`${styles.mobileNavLink} ${isActive('/custom-orders') ? styles.active : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Encargos
+            Estampados
           </Link>
           <Link 
             to="/about" 
             className={`${styles.mobileNavLink} ${isActive('/about') ? styles.active : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Nosotros
+            Empresa
           </Link>
           <Link 
             to="/contact" 
